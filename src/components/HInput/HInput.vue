@@ -33,7 +33,7 @@ export default {
       type: [String,Number],
       default: ''
     },
-    validator: { // 输入验证器，用户名每次输入都会触发，传入的参数为用户输入的值
+    validator: { // 输入验证器，用户每次输入都会触发，传入的参数为用户当前输入的值
       type: [Function,undefined],
       default: undefined
     },
