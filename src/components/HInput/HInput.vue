@@ -13,7 +13,7 @@
     @blur="blurHandle"
     @focus="focusHandle"
     @change="changeHandle"
-    @input.native="inputHandle">
+    @input="inputHandle">
     
     <slot name="prefix" slot="prefix"></slot>
     <slot name="suffix" slot="suffix"></slot>

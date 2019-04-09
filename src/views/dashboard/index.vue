@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard-container">
     <div class="hello"> happy coding ... </div>
-   
+
+    <!-- <h-input v-model="msg" @input="inputHandle"></h-input> -->
 
   </div>
 </template>
@@ -17,7 +18,7 @@ export default {
   },
   methods: {
     inputHandle(val){
-      // console.log( this.msg );
+      console.log( this.msg );
     },
     changeHandle(val ){
       // console.log(val);
