@@ -3,13 +3,12 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <h3 class="title">vue-admin-template-vertical</h3>
       <el-form-item prop="username">
-        <span class="svg-container">
-        </span>
+        <i class="el-icon-warning pl-10" style="color: #fff"></i>
         <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="username" />
       </el-form-item>
       <el-form-item prop="password">
-        <span class="svg-container">
-        </span>
+        
+        <i class="el-icon-news pl-10" style="color: #fff"></i>
         <el-input
           :type="pwdType"
           v-model="loginForm.password"
@@ -17,6 +16,7 @@
           auto-complete="on"
           placeholder="password"
           @keyup.enter.native="handleLogin" />
+
         <span class="show-pwd" @click="showPwd">
         </span>
       </el-form-item>

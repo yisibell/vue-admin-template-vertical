@@ -7,6 +7,7 @@
 
 import BreadCrumb from './BreadCrumb'
 import HPagination from './HPagination'
+import HInput from './HInput'
 
 import layer from './layer'
 
@@ -20,6 +21,7 @@ const install = function (Vue){
 
     BreadCrumb,
     HPagination,
+    HInput,
 
     // more ...
 
@@ -48,6 +50,7 @@ export default {
   install,
   BreadCrumb,
   HPagination,
+  HInput,
 
   // more ...
 }

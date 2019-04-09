@@ -16,7 +16,8 @@ import router from './router'
 
 import CustomResource from '@/components'  // 自定义公共全局 组件、指令、Vue实例方法
 
-import '@/permission' // permission control
+// permission control
+import '@/permission' 
 
 Vue.use( CustomResource )
 

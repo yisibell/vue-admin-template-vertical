@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard-container">
-    <div class="hello" @click="toggle"> happy coding ... </div>
+    <div class="hello"> happy coding ... </div>
+   
+
   </div>
 </template>
 
@@ -10,12 +12,20 @@ export default {
   name: 'Dashboard',
   data(){
     return {
-      isdrag: true,
+      msg: ''
     }
   },
   methods: {
-    toggle(){
-      this.isdrag = !this.isdrag
+    inputHandle(val){
+      // console.log( this.msg );
+    },
+    changeHandle(val ){
+      // console.log(val);
+    },
+    validator( val ){
+      console.log( val );
+
+      return val + '0'
     }
   },
   created(){
