@@ -2,24 +2,40 @@
 
 > A minimal vue admin template with Element UI & axios & iconfont & permission control & lint which layout is vertical!
 
-## Build Setup
-
-```bash
-# Clone project
+## Clone project
+```
 git clone https://github.com/yisibell/vue-admin-template-vertical.git
-
-# Install dependencies
-npm install
-
-# Serve with hot reload at localhost:9528
-npm run dev
-
-# Build for production with minification
-npm run build
-
-# Build for production and view the bundle analyzer report
-npm run build --report
 ```
 
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
+# Logs
+
+- 2019-6-5 脚手架升级为 `@vue/cli 3.x`。
