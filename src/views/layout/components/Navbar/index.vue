@@ -39,10 +39,15 @@ export default {
     return {}
   },
   computed: {
-    noHiddenRoutes(){  // 非隐藏路由表
+    // 完整路由表
+    allRoutes(){
+      return this.$router.options.routes
+    },
+    // 非隐藏路由表
+    noHiddenRoutes(){  
 
       // 1. 非 hidden 项
-      let alls = this.$router.options.routes.filter( v => !v.hidden )
+      let alls = this.noHiddenRoutesFilter( this.allRoutes )
 
       // 2. 子菜单只有一个合并 path
       alls = alls.reduce( ( init , v ) => {
@@ -85,21 +90,25 @@ export default {
 
       return alls
     },
-    activeIndex(){    // 默认激活菜单
+    // 默认激活菜单
+    activeIndex(){    
       return this.getFirstPath( this.noHiddenRoutes )
     },
-    variables() {     // 样式常量
+    // 样式常量
+    variables() {     
       return variables
     },
   },
   methods: {
-    handleSelect(key, keyPath) {  // 菜单选择
+    // 菜单选择
+    handleSelect(key, keyPath) {  
       let fullPath = keyPath.join('/')
       
       this.$router.push( {
         path: fullPath
       })
     },
+    // 获取路由表中的第一个菜单路径名
     getFirstPath( arr ){ 
       let index = arr.findIndex( v => !v.hidden );
 
@@ -108,6 +117,24 @@ export default {
       }
 
       return arr[index].path
+    },
+    // 递归过滤出非隐藏路由表
+    noHiddenRoutesFilter( routesArr = [] ){  
+      let arr = []
+      routesArr.forEach( v => {
+
+        if ( !v.hidden ){
+          arr.push( v )
+        }
+
+        if ( v.children && v.children.length > 0 ){
+          v.children = this.noHiddenRoutesFilter( v.children )
+        }
+       
+      })
+
+      return arr;
+     
     }
   },
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-admin-template-vertical",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.7.2",
+    "core-js": "^2.6.5",
+    "element-ui": "^2.9.1",
     "js-cookie": "^2.2.0",
     "moment": "^2.24.0",
     "normalize.css": "^7.0.0",
     "nprogress": "^0.2.0",
-    "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"

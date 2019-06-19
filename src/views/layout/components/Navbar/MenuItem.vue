@@ -1,6 +1,6 @@
 <template>
 
-  <el-menu-item v-if="!item.children && !item.hidden" :index="item.path">
+  <el-menu-item v-if="(!item.children || item.children.length === 0) && !item.hidden" :index="item.path">
     {{item.meta.title}}
   </el-menu-item>
 
