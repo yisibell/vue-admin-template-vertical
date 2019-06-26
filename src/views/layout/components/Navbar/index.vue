@@ -1,18 +1,18 @@
 <template>
   <div class="navbar-wrap clearfix">
 
-    <div class="logo"> LOGO </div>
+    <div class="logo f-20"> LOGO </div>
 
     <el-menu
+      ref="elMenu"
       mode="horizontal"
       menu-trigger="hover"
       :default-active="activeIndex"
       @select="handleSelect"
-      :background-color="variables.menuBg"
-      :text-color="variables.menuText"
-      :active-text-color="variables.menuActiveText">
+      :active-text-color="variables.menuText">
 
-      <menu-item v-for="route in noHiddenRoutes" :key="route.path" :item="route"></menu-item>
+      <menu-item @click.native="clickHandle" class="f16" v-for="route in noHiddenRoutes" 
+      :key="route.path" :item="route"></menu-item>
 
     </el-menu>
 
@@ -36,10 +36,20 @@ export default {
     }
   },
   data(){
-    return {}
+    return {
+      activeIndex: ''  //当前激活菜单
+    }
+  },
+  watch: {
+    '$route': {
+      handler(val){
+        this.updateActiveMenuWhenRoutesChange()
+      },
+      deep: true
+    }
   },
   computed: {
-    // 完整路由表
+    // 完整静态路由表
     allRoutes(){
       return this.$router.options.routes
     },
@@ -57,6 +67,7 @@ export default {
           let o = {
             ...childs[0],
             path: v.path + "/" + childs[0].path,
+            noChildren: true
           }
           init.push( o )
         }
@@ -90,16 +101,31 @@ export default {
 
       return alls
     },
-    // 默认激活菜单
-    activeIndex(){    
-      return this.getFirstPath( this.noHiddenRoutes )
-    },
     // 样式常量
     variables() {     
       return variables
-    },
+    }
   },
   methods: {
+    // 清除所有单个菜单项的选中样式
+    clearNoChildrenMenuStyle(){
+      const elMenuItem = document.querySelectorAll('.el-menu-item')
+          
+      for ( let dom of elMenuItem ){
+        if ( dom.classList.contains('no-children') )
+        dom.style = ''
+      }
+    },
+    // 单个菜单项点击控制
+    clickHandle(e){
+      let el = e.target;
+      this.clearNoChildrenMenuStyle()
+      if ( el.classList.contains('no-children') ){
+        el.style.borderBottom = this.variables.menuBorderBottomActive
+        el.style.color = this.variables.menuText
+      }
+
+    },
     // 菜单选择
     handleSelect(key, keyPath) {  
       let fullPath = keyPath.join('/')
@@ -107,8 +133,10 @@ export default {
       this.$router.push( {
         path: fullPath
       })
+
+      this.clearNoChildrenMenuStyle()
     },
-    // 获取路由表中的第一个菜单路径名
+    // 递归获取路由表菜单中的第一个 hidden 项的前一项 路由对象 path 值
     getFirstPath( arr ){ 
       let index = arr.findIndex( v => !v.hidden );
 
@@ -135,9 +163,43 @@ export default {
 
       return arr;
      
+    },
+    // 获取当前路由对应菜单 path 值
+    getCurrRoutesPath( arr , resPath = ''){
+      
+      let fullPath = this.$route.fullPath.split('/').slice(1),
+          fullPathArr = fullPath.slice( fullPath.findIndex( v => v === resPath) );  // 当前完整路径数组
+      
+      resPath = fullPathArr[0] || '';
+
+      arr.forEach( (v,i) => {
+        if ( v.path === fullPathArr[i] ){
+          resPath = v.path
+        }
+
+        if ( v.children && v.children.length > 0 ){
+          resPath = this.getCurrRoutesPath( v.children , fullPathArr[1] )
+        }
+      })
+
+      return resPath;
+          
+    },
+    // 根据路由变化更新激活菜单项
+    updateActiveMenuWhenRoutesChange(){
+      
+      const el = document.querySelector(`[data-active="${this.$route.path}"]`);
+      this.clearNoChildrenMenuStyle()
+      if (el){
+        el.style.borderBottom = this.variables.menuBorderBottomActive
+        el.style.color = this.variables.menuText
+      }
+      this.activeIndex = this.getCurrRoutesPath( this.noHiddenRoutes )
     }
   },
-
+  mounted(){
+    this.updateActiveMenuWhenRoutesChange()
+  }
 }
 </script>
 
@@ -149,7 +211,8 @@ export default {
 
   height: $navbarHeight;
   background-color: $menuBg;
-  padding: 0px 15px;
+  padding: 0px 20px;
+  box-shadow: 2px 2px 2px #dcdcdc;
 
   .logo {
     width: 145px;
@@ -173,6 +236,7 @@ export default {
       .el-submenu__title {
         line-height: $navbarHeight;
         height: $navbarHeight;
+        font-size: 16px;
       }
 
       i.el-submenu__icon-arrow {
@@ -180,8 +244,9 @@ export default {
       }
 
       &.is-active {
+        border-bottom: $menuBorderBottomActive;
         i.el-submenu__icon-arrow {
-          color: $menuActiveText;
+          color: $menuTextActive;
         }
       }
 

@@ -14,7 +14,7 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run serve or npm run dev
 ```
 
 ### Compiles and minifies for production
@@ -39,3 +39,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 # Logs
 
 - 2019-6-5 脚手架升级为 `@vue/cli 3.x`。
+- 2019-2-20   修复 `NavBar` 组件激活状态问题。

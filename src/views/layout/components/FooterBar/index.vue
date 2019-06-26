@@ -14,10 +14,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/variables.scss';
+
 .footer-bar{
   padding: 15px;
-  min-width: 100%;
+  width: 100%;
   text-align: center;
+  background-color: $footerbarBg;
+  color: $footerbarFontColor;
 }
 </style>
 

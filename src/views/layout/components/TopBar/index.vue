@@ -27,18 +27,21 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/variables.scss';
 
 .top-bar{
   width: 100%;
   height: 30px;
   line-height: 30px;
   padding: 0px 15px;
-
+  background-color: $topbarBg;
+  
   .item {
     cursor: pointer;
     float: right;
     margin-left: 15px;
     font-size: 12px;
+    color: $topbarFontColor;
   }
 
 
