@@ -1,7 +1,11 @@
 {
   "name": "vue-admin-template-vertical",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
+  "author": {
+    "name": "hongwenqing(elenh)",
+    "email": "yisiwings@163.com"
+  },
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
